@@ -1,0 +1,61 @@
+﻿
+@model StudentTeacherViewModel
+
+@{
+    ViewBag.Title = "Student";
+}
+
+<h3>Add New Student</h3>
+<form class="form form-horizontal" method="POST">
+    <div class="form-group">
+        <img src="https://image.ibb.co/iKfYKx/computer.jpg" />
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Name:</label>
+            <input type="text" class="form-control" asp-for="@Model.Student.Name">
+            <span asp-validation-for="@Model.Student.Name"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Age:</label>
+            <input type="text" class="form-control" asp-for="@Model.Student.Age">
+            <span asp-validation-for="@Model.Student.Age"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            <label>Country:</label>
+            <input type="text" class="form-control" asp-for="@Model.Student.Country">
+            <span asp-validation-for="@Model.Student.Country"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<hr />
+
+<h3>학생리스트</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+        <tr>
+            <td>@student.Name</td>
+            <td>@student.Age</td>
+            <td><a asp-controller="Home" asp-action="Detail" asp-route-id="@student.Id">Detail</a></td>
+            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@student.Id">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@student.Id">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">MyApp</a>
+            </div>
+            <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>                    
+                }                
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li><a asp-controller="Home" asp-action="Student">Student</a></li>
+                }                
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                     <li><a asp-controller="Account" asp-action="Logout">로그아웃</a></li>
+                }
+                else
+                {
+                     <li><a asp-controller="Account" asp-action="Register">회원가입</a></li>
+                     <li><a asp-controller="Account" asp-action="Login">로그인</a></li>
+                }             
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <span class="navbar-text">
+                My Footer
+            </span>
+        </div>
+    </div>
+</body>
+</html>
